@@ -19,6 +19,6 @@ function [Theta, dTheta, d2Theta, PertTorque, accEMG, velEMG, posEMG, EMG, posFB
     % delayed feedback signals
     posFB = posFB; % position feedback
     velFB = velFB; % velocity feedback
-    accFB = velFB; % acceleration feedback
+    accFB = accFB; % acceleration feedback
     
 end
