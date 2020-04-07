@@ -1,5 +1,5 @@
 function [Theta, PertTorque,StiffnessComp] = RunBaseSim(ModelName,m, L, K, B, g,...
-        time, ICs, PertAmplitude, PertPeriod, PertWidth, PertDelay);
+        time, ICs, ka,kv,kp,tau, PertAmplitude, PertPeriod, PertWidth, PertDelay)
     options = simset('SrcWorkspace','current');
     sim(ModelName,time,options);
     
