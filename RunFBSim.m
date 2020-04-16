@@ -1,6 +1,8 @@
 %% Runs Feedback Simulition in Simulink
 function [Theta, dTheta, d2Theta, PertTorque, accEMG, velEMG, posEMG, EMG, posFB, velFB, accFB] = ...
     RunFBSim(ModelName, m, L, g, time, ICs, ka, kv, kp, tau, lambda, PertAmplitude, PertPeriod, PertWidth, PertDelay)
+    
+
     options = simset('SrcWorkspace','current');
     sim(ModelName,time,options);
     

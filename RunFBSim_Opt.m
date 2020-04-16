@@ -1,5 +1,11 @@
 %% Runs Feedback simulation and generates the cost function to be optimized
-function [Cost] = RunFBSim_Opt(ModelName, m, L, g, time, ICs, ka, kv, kp, tau, lambda, PertAmplitude, PertPeriod, PertWidth, PertDelay)
+function [Cost] = RunFBSim_Opt(x, Q, rho, Omega)    
+    load('SimVariables.mat')
+
+    ka = x(1);
+    kv = x(2);
+    kp = x(3);
+    
     options = simset('SrcWorkspace','current');
     sim(ModelName,time,options);
 
@@ -23,11 +29,8 @@ function [Cost] = RunFBSim_Opt(ModelName, m, L, g, time, ICs, ka, kv, kp, tau, l
     
     
     %Cost Function
-    x = [Theta.Data, dTheta.Data, d2Theta.Data]; %Pendulum kinematics
-    Q = [0.0001 0 0; 0 0.001 0; 0 0 0.01]; %Weighting Vector
-    rho = 0.01; %EMG weighting
-    Omega = 0.1; %Terminal Position weighting
-    Cost = x'*Q*x + rho.*EMG.Data.^2 + Omega.*x(end,:); % Cost Function Need the cost function to analyze the first two earms at every time point. 
-                                                        % Maybe create a  cost variable in the simulink itself?
+    x1 = [Theta.Data, dTheta.Data, d2Theta.Data]; %Pendulum kinematics
+    
+    Cost = x1(:,1)'*Q(1,1)*x1(:,1) + x1(:,2)'*Q(2,2)*x1(:,2) + x1(:,3)'*Q(3,3)*x1(:,3) + rho.*sum(EMG.Data.^2) + Omega.*sum(x1(end,:)); %Cost Function that produces  single scalar output  
 
 end
