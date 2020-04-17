@@ -1,6 +1,6 @@
 %% Runs Feedback Simulition in Simulink
 function [Theta, dTheta, d2Theta, PertTorque, accEMG, velEMG, posEMG, EMG, posFB, velFB, accFB] = ...
-    RunFBSim(ModelName, m, L, g, time, ICs, ka, kv, kp, tau, lambda, PertAmplitude, PertPeriod, PertWidth, PertDelay)
+    RunFBSim(ModelName, m, L, g, time, ICs, ka, kv, kp, tau, lambda, PertAmplitude, PertPeriod, PertWidth, PertDelay_Acc, PertDelay_DeAcc);
     
 
     options = simset('SrcWorkspace','current');
@@ -9,7 +9,7 @@ function [Theta, dTheta, d2Theta, PertTorque, accEMG, velEMG, posEMG, EMG, posFB
     % output pendulum kinematics
     Theta = Theta; % angle
     dTheta = dTheta; % angular velocity
-    d2Theta - d2Theta; % angular velocity
+    d2Theta = d2Theta; % angular velocity
     
     PertTorque = PertTorque; % perturbation torque
     
