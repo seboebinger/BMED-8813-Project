@@ -1,6 +1,6 @@
 %% Optimization of the Feedback Simulink Model
 clear; close all
-fdir = 'C:\Users\seboe\Documents\Grad School\Classes\BMED 8813 Computational Neuromechanics\Project Code\BMED-8813-Project\savedfigs\BasePendulum\'; %save directory for figures
+fdir = 'C:\Users\seboe\Documents\Grad School\Classes\BMED 8813 Computational Neuromechanics\Project Code\BMED-8813-Project\savedfigs\FeedbackPendulum\'; %save directory for figures
 % Constant Simulink Parameters
 g = 9.81; %m/s^2
 m = 4; %kg (Value taken from Lockhart and Ting 2007)
@@ -37,7 +37,7 @@ b = []; %Linear Inequality Constraints
 Aeq = []; %Linear equality Constraints
 beq = []; %Linear equality Constraints
 LB = [0 0 0]; %Lower Bound 
-UB = [10 10 10]; %Upper Bound
+UB = [100 100 100]; %Upper Bound
 nonlcon = []; %Nonlinear Constraints
 options_optimization = optimoptions('fmincon','Display','iter');
 
@@ -74,6 +74,7 @@ plot(EMG_opt)
 title('EMG')
 sgtitle('Optimize vs Unoptimized Simulation')
 legend('Unoptimized','Optimized')
+saveas(gcf,[fdir 'SRM No B or K Optimization_' date '.jpg'],'jpg')
 
 figure
 hold on
@@ -81,8 +82,7 @@ plot(accEMG_opt,'r-')
 plot(velEMG_opt,'b-')
 plot(posEMG_opt,'m-')
 plot(EMG_opt,'k')
-
 title('Optimized EMG components')
 legend('Acceleration Component','Velocity Component','Position Component','Reconstruction')
-
+saveas(gcf,[fdir 'SRM No B or K EMGComp_' date '.jpg'],'jpg')
 
